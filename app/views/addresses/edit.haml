@@ -1,0 +1,14 @@
+= simple_form_for address do |a|
+  = a.input :line_1
+  = a.input :line_2
+  = a.input :line_3
+  = a.input :city
+  = a.input :province do
+    = a.subregion_select(:province, "US", {priority: ['IL'], prompt: 'Please select a state', selected: a.object.province}, required: 'region required')
+  = a.input :postal_code
+  = a.input :country do
+    = a.country_select :country, {priority: %w(US), prompt: 'Please select a country', selected: a.object.country }
+
+  = link_to "Cancel", user_address_card_path(current_user, current_user.address_card), class: "button"
+  = a.submit 'Save', class: "button"
+

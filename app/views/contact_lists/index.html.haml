@@ -1,0 +1,10 @@
+%h1
+  Contact Lists
+%ul
+  - contact_lists.each do |cl|
+    %li= link_to cl.name, user_contact_list_path(user, cl)
+
+
+= link_to 'Back to My Account', user_address_card_path(current_user, current_user.address_card),
+  class: 'button'
+= link_to 'New Contact List', new_user_contact_list_path, class: 'button'

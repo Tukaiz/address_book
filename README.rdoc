@@ -1,0 +1,13 @@
+= AddressBook
+
+* Add address book functionality to parent app.
+
+
+== Instructions
+
+* rake address_book:install:migrations
+* Add the following to your user model:
+
+belongs_to :address_card
+has_many :address_group_users
+has_many :address_groups, through: :address_group_users

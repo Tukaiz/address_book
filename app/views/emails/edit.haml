@@ -1,0 +1,7 @@
+= simple_form_for email do |e|
+  = e.input :kind
+  = e.input :value
+
+  = link_to "Cancel", user_address_card_path(current_user, current_user.address_card), class: "button"
+  = e.submit 'Save', class: "button"
+

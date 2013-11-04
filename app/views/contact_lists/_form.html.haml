@@ -1,0 +1,11 @@
+= simple_form_for([user, contact_list]) do |f|
+  = f.error_notification
+
+  .inputs
+    = f.input :name
+
+  .inputs
+    = f.association :address_cards, collection: user.contacts, label_method: :display_name
+
+  .actions
+    = f.button :submit

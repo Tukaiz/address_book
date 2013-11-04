@@ -1,0 +1,7 @@
+= simple_form_for phone do |p|
+  = p.input :kind
+  = p.input :value
+
+  = link_to "Cancel", user_address_card_path(current_user, current_user.address_card), class: "button"
+  = p.submit 'Save', class: "button"
+

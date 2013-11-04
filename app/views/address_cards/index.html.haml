@@ -1,0 +1,7 @@
+%h1
+  Address Cards
+%ul
+  - address_cards.each do |ac|
+    %li= link_to ac.last_name + ', ' + ac.first_name, user_address_card_path(user, ac)
+
+= link_to 'New Address Card', new_user_address_card_path(user)

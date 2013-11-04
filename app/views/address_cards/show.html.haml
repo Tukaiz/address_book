@@ -1,0 +1,68 @@
+.account_content
+  = render partial: 'layouts/shared/account_navigation'
+  .address_info
+    %h3 Account Address
+    %h4= address_card.full_name
+    %ul
+      - address_card.addresses.each do |a|
+        %li= a.line_1
+        %li= a.line_2
+        %li= a.line_3
+        %li= a.formated_city_state_line
+        %li= a.country
+        %li=link_to 'Edit Address', edit_address_path(a)
+    %ul
+      - address_card.emails.each do |ea|
+        %li
+          %span.label= "#{ea.kind} email: "
+          %span= ea.value
+        %li=link_to 'Edit Email', edit_email_path(ea)
+    %ul
+      - address_card.phones.each do |ea|
+        %li
+          %span.label= "#{ea.kind} phone: "
+          %span= ea.value
+        %li=link_to 'Edit Phone', edit_phone_path(ea)
+    =link_to 'Edit Address Card', edit_user_address_card_path(current_user, address_card), class: "button"
+  .user_info
+    %h3 User Information
+
+-# %h1= address_card.display_name
+-# %table
+-#   %thead
+-#     %tr
+-#       %th
+-#         First Name
+-#       %th
+-#         Last Name
+-#       %th
+-#         Email Addresses
+-#       %th
+-#         Addresses
+-#       %th
+-#         Phone Numbers
+-#   %tbody
+-#     %tr
+-#       %td
+-#         = address_card.first_name
+-#       %td
+-#         = address_card.last_name
+-#       %td
+-#         %ul
+-#           - address_card.emails.each do |ea|
+-#             %li
+-#               = ea.value
+-#       %td
+-#         %ul
+-#           - address_card.addresses.each do |a|
+-#             %li
+-#               = a.line_1
+-#       %td
+-#         %ul
+-#           - address_card.phones.each do |a|
+-#             %li
+-#               = a.value
+
+
+
+/= link_to 'Edit', edit_user_address_card_path(user, address_card)

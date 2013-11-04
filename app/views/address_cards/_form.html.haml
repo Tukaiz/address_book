@@ -1,0 +1,37 @@
+= simple_nested_form_for([user, address_card]) do |f|
+  = f.error_notification
+
+  .inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.fields_for :emails do |e|
+      = e.input :kind, label: 'Label', placeholder: 'Work'
+      = e.input :value, label: 'Email Address', placeholder: 'example@domain.com'
+      = e.link_to_remove "Remove this email address"
+    %p
+      = f.link_to_add "Add an email address", :emails
+    = f.fields_for :phones do |p|
+      = p.input :kind, label: 'Label', placeholder: 'Work'
+      = p.input :value, label: 'Phone Number', placeholder: '8474551588'
+      = p.link_to_remove "Remove this phone number"
+    %p
+      = f.link_to_add "Add a phone number", :phones
+    = f.fields_for :addresses do |a|
+      = a.input :line_1
+      = a.input :line_2
+      = a.input :line_3
+      = a.input :city
+      = a.input :province do
+        = a.subregion_select(:province, "US", {priority: ['IL'], prompt: 'Please select a state', object: a.object}, required: 'region required', )
+      = a.input :postal_code
+      = a.input :country do
+        = a.country_select :country, {priority: %w(US), prompt: 'Please select a country', object: a.object}
+      = a.link_to_remove "Remove this address"
+    %p
+      = f.link_to_add "Add an address", :addresses
+    =f.hidden_field :contact_list_id, value: (params[:contact_list] || user.contact_lists.first.id)
+
+
+
+  .actions
+    = f.button :submit
