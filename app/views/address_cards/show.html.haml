@@ -23,7 +23,8 @@
           %span.label= "#{ea.kind} phone: "
           %span= ea.value
         %li=link_to 'Edit Phone', edit_phone_path(ea)
-    =link_to 'Edit Address Card', edit_user_address_card_path(current_user, address_card), class: "button"
+    = link_to 'Edit Address Card', edit_user_address_card_path(current_user, address_card), class: "button"
+    = link_to 'Change Password', edit_change_password_path, class: 'button'
   .user_info
     %h3 User Information
 
