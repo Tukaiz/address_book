@@ -7,7 +7,7 @@
 Rails.application.routes.draw do
 
   #constraints FeatureConstraint.new(:address_book) do
-    resources :users do
+    resources :users, only: :none do
       resources :contact_lists
       resources :address_cards
     end
