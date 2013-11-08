@@ -6,9 +6,11 @@ All Address Cards will be created / edited through this contact list.
 class AddressCardsController < ApplicationController
   before_action :require_user
   respond_to :html, :json
-  expose(:address_card, attributes: :address_card_params)
-  expose(:address_cards, attributes: :address_card_params)
   expose(:user)
+  expose(:address_card, attributes: :address_card_params) { user.address_card }
+  expose(:address_cards, attributes: :address_card_params) do
+    user.address_cards
+  end
   expose(:contact_list) { user.contact_lists.first }
 
   def new
@@ -24,17 +26,22 @@ class AddressCardsController < ApplicationController
 
   def update
     if address_card.save
-      redirect_to user_address_card_path(user, address_card), notice: 'Address Card was successfully updated.'
+      redirect_to user_address_card_path(user, address_card),
+        notice: 'Address Card was successfully updated.'
     else
       render action: 'edit'
     end
   end
 
   def create
-    present_contact_list = user.contact_lists.find(address_card_params[:contact_list_id])
+    present_contact_list = user.contact_lists.find(
+      address_card_params[:contact_list_id])
     if contact_list && contact_list.address_cards << address_card
-      present_contact_list.address_cards << address_card if present_contact_list.id != contact_list.id
-      redirect_to user_contact_list_path(user, present_contact_list), notice: 'Address Card was successfully created.'
+      if present_contact_list.id != contact_list.id
+        present_contact_list.address_cards << address_card
+      end
+      redirect_to user_contact_list_path(user, present_contact_list),
+        notice: 'Address Card was successfully created.'
     else
       render action: 'new'
     end
@@ -42,7 +49,8 @@ class AddressCardsController < ApplicationController
 
   def destroy
     address_card.destroy
-    redirect_to address_cards_url, notice: 'Address Card was successfully destroyed.'
+    redirect_to address_cards_url,
+      notice: 'Address Card was successfully destroyed.'
   end
 
   private
@@ -57,8 +65,12 @@ class AddressCardsController < ApplicationController
   end
 
   def address_card_params
-    params.require(:address_card).permit(:address_card, :first_name, :last_name, :contact_list_id, emails_attributes: [:kind, :value, :_destroy, :id],
-                                        addresses_attributes: [:line_1, :line_2, :line_3, :city, :province, :country, :postal_code, :_destroy, :id],
-                                        phones_attributes: [:kind, :value, :_destroy, :id])
+    params.require(:address_card).permit(
+      :address_card, :first_name, :last_name, :contact_list_id,
+      emails_attributes: [:kind, :value, :_destroy, :id],
+      addresses_attributes: [:line_1, :line_2, :line_3, :city, :province,
+        :country, :postal_code, :_destroy, :id],
+      phones_attributes: [:kind, :value, :_destroy, :id]
+    )
   end
 end
