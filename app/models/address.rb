@@ -1,4 +1,5 @@
 class Address < ActiveRecord::Base
+  validates :line_1, :city, :province, :postal_code, :country, presence: true
   belongs_to :address_card
 
   def url_for_address
