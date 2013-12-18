@@ -25,7 +25,7 @@ class AddressCardsController < ApplicationController
   end
 
   def update
-    if address_card.save
+    if address_card.update(address_card_params)
       redirect_to user_address_card_path(user, address_card),
         notice: 'Address Card was successfully updated.'
     else

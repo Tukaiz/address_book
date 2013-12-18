@@ -12,7 +12,10 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
-gem 'feature_system', :path => '../feature_system'
-group :development do
+gem 'feature_system', '0.0.2', :git => 'git@github.com:Tukaiz/feature_system.git'
+gem 'decent_exposure'
+
+group :development, :test do
   gem 'faker'
+  gem 'pry-rails'
 end
