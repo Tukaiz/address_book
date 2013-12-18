@@ -17,15 +17,7 @@
     %p
       = f.link_to_add "Add a phone number", :phones
     = f.fields_for :addresses do |a|
-      = a.input :line_1
-      = a.input :line_2
-      = a.input :line_3
-      = a.input :city
-      = a.input :province do
-        = a.subregion_select(:province, "US", {priority: ['IL'], prompt: 'Please select a state', object: a.object}, required: 'region required', )
-      = a.input :postal_code
-      = a.input :country do
-        = a.country_select :country, {priority: %w(US), prompt: 'Please select a country', object: a.object}
+      = render 'addresses/address_fields', a: a
       = a.link_to_remove "Remove this address"
     %p
       = f.link_to_add "Add an address", :addresses
