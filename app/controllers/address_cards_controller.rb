@@ -7,10 +7,7 @@ class AddressCardsController < ApplicationController
   before_action :require_user
   respond_to :html, :json
   expose(:user)
-  expose(:address_card, attributes: :address_card_params) { user.address_card }
-  expose(:address_cards, attributes: :address_card_params) do
-    user.address_cards
-  end
+  expose(:address_card, attributes: :address_card_params) #{ user.address_card }
   expose(:contact_list) { user.contact_lists.first }
 
   def new

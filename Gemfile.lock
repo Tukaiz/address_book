@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    address_book (0.0.5)
+    address_book (0.0.7)
       rails (~> 4.0.0)
 
 GEM
