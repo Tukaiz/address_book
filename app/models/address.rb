@@ -1,6 +1,7 @@
 class Address < ActiveRecord::Base
   validates :line_1, :city, :province, :postal_code, :country, presence: true
   belongs_to :address_card
+  has_and_belongs_to_many :shipping_carrier_services
 
   def url_for_address
     "/addresses/#{id}"
