@@ -1,6 +1,6 @@
 class AddressCard < ActiveRecord::Base
   has_many :emails
-  has_many :addresses
+  has_many :addresses, as: :addressable
   has_many :phones
   has_and_belongs_to_many :contact_lists
   accepts_nested_attributes_for :emails, :allow_destroy => true
