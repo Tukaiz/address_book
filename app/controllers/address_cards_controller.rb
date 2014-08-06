@@ -7,7 +7,7 @@ class AddressCardsController < ApplicationController
   before_action :require_user
   respond_to :html, :json
   expose(:user)
-  expose(:address_card)
+  expose(:address_card, attributes: :address_card_params) #{ user.address_card }
   expose(:contact_list) { user.contact_lists.first }
 
   def new
@@ -22,11 +22,11 @@ class AddressCardsController < ApplicationController
   end
 
   def update
-    if address_card.update(address_card_params)
+    if address_card.save
       redirect_to user_address_card_path(user, address_card),
         notice: 'Address Card was successfully updated.'
     else
-      render action: 'edit'
+      render :edit
     end
   end
 
